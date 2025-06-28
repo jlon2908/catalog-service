@@ -1,4 +1,4 @@
-name: terraform-deploy
+name: terraform-deploy-all
 
 on:
   push:
@@ -22,21 +22,54 @@ jobs:
         with:
           terraform_version: 1.5.7
 
-      - name: Terraform Init
+      ###################################################
+      # MODULE 1: terraform-preinfra
+      ###################################################
+      - name: Terraform Init (preinfra)
         run: terraform init
         working-directory: terraform-skillnest/terraform-preinfra
 
-      - name: Terraform Plan
-        run: |
-          terraform plan \
-            -input=false \
-            -lock-timeout=60s \
-            -out=tfplan.binary \
-            -var="artifacts_bucket_name=arka-dev-artifacts" \
-            -var="environment=dev" \
-            -var="project=arka"
+      - name: Terraform Plan (preinfra)
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
+          -var="artifacts_bucket_name=arka-dev-artifacts" \
+          -var="environment=dev" \
+          -var="project=arka"
         working-directory: terraform-skillnest/terraform-preinfra
 
-      - name: Terraform Apply
+      - name: Terraform Apply (preinfra)
         run: terraform apply -input=false -auto-approve tfplan.binary
         working-directory: terraform-skillnest/terraform-preinfra
+
+      ###################################################
+      # MODULE 2: terraform-alb
+      ###################################################
+      - name: Terraform Init (alb)
+        run: terraform init
+        working-directory: terraform-skillnest/terraform-alb
+
+      - name: Terraform Plan (alb)
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
+          -var="environment=dev" \
+          -var="project=arka"
+        working-directory: terraform-skillnest/terraform-alb
+
+      - name: Terraform Apply (alb)
+        run: terraform apply -input=false -auto-approve tfplan.binary
+        working-directory: terraform-skillnest/terraform-alb
+
+      ###################################################
+      # MODULE 3: terraform-ecs
+      ###################################################
+      - name: Terraform Init (ecs)
+        run: terraform init
+        working-directory: terraform-skillnest/terraform-ecs
+
+      - name: Terraform Plan (ecs)
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
+          -var="environment=dev" \
+          -var="project=arka"
+        working-directory: terraform-skillnest/terraform-ecs
+
+      - name: Terraform Apply (ecs)
+        run: terraform apply -input=false -auto-approve tfplan.binary
+        working-directory: terraform-skillnest/terraform-ecs
