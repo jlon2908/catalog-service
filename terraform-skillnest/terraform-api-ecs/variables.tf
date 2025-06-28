@@ -1,0 +1,52 @@
+##########################################
+# 🔐 SECRETS (provenientes de GitHub Secrets)
+##########################################
+
+variable "db_r2dbc_url" {
+  description = "R2DBC connection URL for the database"
+  type        = string
+}
+
+variable "db_jdbc_url" {
+  description = "JDBC connection URL for the database"
+  type        = string
+}
+
+variable "db_username" {
+  description = "Database username"
+  type        = string
+}
+
+variable "db_password" {
+  description = "Database password"
+  type        = string
+}
+
+variable "jwt_secret" {
+  description = "JWT secret used for authentication"
+  type        = string
+}
+
+
+
+variable "name_prefix" {
+  description = "Prefix to use for naming AWS resources"
+  type        = string
+  default     = "arka"
+}
+
+variable "aws_region" {
+  description = "AWS region where resources will be deployed"
+  type        = string
+  default     = "us-east-1"
+}
+
+variable "common_tags" {
+  description = "Common tags to apply to all resources"
+  type        = map(string)
+  default     = {
+    Project     = "catalog-service"
+    Environment = "dev"
+    Owner       = "arka"
+  }
+}
