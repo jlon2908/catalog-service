@@ -33,10 +33,11 @@ jobs:
         run: terraform -chdir=terraform-skillnest/terraform-preinfra workspace select dev || terraform -chdir=terraform-skillnest/terraform-preinfra workspace new dev
 
       - name: Terraform Plan (preinfra)
-        run: terraform -chdir=terraform-skillnest/terraform-preinfra plan -input=false -lock-timeout=60s -out=tfplan.binary \
-          -var="artifacts_bucket_name=arka-dev-artifacts" \
-          -var="environment=dev" \
-          -var="project=arka"
+        run: |
+          terraform -chdir=terraform-skillnest/terraform-preinfra plan -input=false -lock-timeout=60s -out=tfplan.binary \
+            -var="artifacts_bucket_name=arka-dev-artifacts" \
+            -var="environment=dev" \
+            -var="project=arka"
 
       - name: Terraform Apply (preinfra)
         run: terraform -chdir=terraform-skillnest/terraform-preinfra apply -input=false -auto-approve tfplan.binary
@@ -51,15 +52,16 @@ jobs:
         run: terraform -chdir=terraform-skillnest/terraform-db workspace select dev || terraform -chdir=terraform-skillnest/terraform-db workspace new dev
 
       - name: Terraform Plan (db)
-        run: terraform -chdir=terraform-skillnest/terraform-db plan -input=false -lock-timeout=60s -out=tfplan.binary \
-          -var="environment=dev" \
-          -var="project=arka" \
-          -var="db_identifier=arka-dev-db" \
-          -var="db_username=${{ secrets.DB_USERNAME }}" \
-          -var="db_password=${{ secrets.DB_PASSWORD }}" \
-          -var="db_name=arkadb" \
-          -var='vpc_id=vpc-0513a9bab7a11e39e' \
-          -var='subnet_ids=["subnet-07a322f484b9f962","subnet-09ee219f4838cb06f"]'
+        run: |
+          terraform -chdir=terraform-skillnest/terraform-db plan -input=false -lock-timeout=60s -out=tfplan.binary \
+            -var="environment=dev" \
+            -var="project=arka" \
+            -var="db_identifier=arka-dev-db" \
+            -var="db_username=${{ secrets.DB_USERNAME }}" \
+            -var="db_password=${{ secrets.DB_PASSWORD }}" \
+            -var="db_name=arkadb" \
+            -var='vpc_id=vpc-0513a9bab7a11e39e' \
+            -var='subnet_ids=["subnet-07a322f484b9f962","subnet-09ee219f4838cb06f"]'
 
       - name: Terraform Apply (db)
         run: terraform -chdir=terraform-skillnest/terraform-db apply -input=false -auto-approve tfplan.binary
@@ -74,15 +76,15 @@ jobs:
         run: terraform -chdir=terraform-skillnest/terraform-api-ecs workspace select dev || terraform -chdir=terraform-skillnest/terraform-api-ecs workspace new dev
 
       - name: Terraform Plan (api-ecs)
-        run: terraform -chdir=terraform-skillnest/terraform-api-ecs plan -input=false -lock-timeout=60s -out=tfplan.binary \
-          -var="environment=dev" \
-          -var="project=arka" \
-          -var="db_r2dbc_url=${{ secrets.DB_R2DBC_URL }}" \
-          -var="db_jdbc_url=${{ secrets.DB_JDBC_URL }}" \
-          -var="db_username=${{ secrets.DB_USERNAME }}" \
-          -var="db_password=${{ secrets.DB_PASSWORD }}" \
-          -var="jwt_secret=${{ secrets.JWT_SECRET }}"
+        run: |
+          terraform -chdir=terraform-skillnest/terraform-api-ecs plan -input=false -lock-timeout=60s -out=tfplan.binary \
+            -var="environment=dev" \
+            -var="project=arka" \
+            -var="db_r2dbc_url=${{ secrets.DB_R2DBC_URL }}" \
+            -var="db_jdbc_url=${{ secrets.DB_JDBC_URL }}" \
+            -var="db_username=${{ secrets.DB_USERNAME }}" \
+            -var="db_password=${{ secrets.DB_PASSWORD }}" \
+            -var="jwt_secret=${{ secrets.JWT_SECRET }}"
 
       - name: Terraform Apply (api-ecs)
         run: terraform -chdir=terraform-skillnest/terraform-api-ecs apply -input=false -auto-approve tfplan.binary
-
