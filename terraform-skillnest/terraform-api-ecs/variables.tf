@@ -60,3 +60,8 @@ variable "common_tags" {
     Owner       = "arka"
   }
 }
+
+variable "container_image" {
+  description = "Docker image URI for the container"
+  type        = string
+}

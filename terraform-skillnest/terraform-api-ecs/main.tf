@@ -32,6 +32,9 @@ module "ecs" {
   vpc_link_security_group_id = module.apigateway.vpc_link_security_group_id
   tags                     = var.common_tags
 
+  container_image          = var.container_image
+  aws_region               = var.aws_region
+
   container_environment = [
     {
       name  = "DB_R2DBC_URL"
