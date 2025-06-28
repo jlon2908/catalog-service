@@ -65,6 +65,9 @@ jobs:
       ###################################################
       # MODULE 3: terraform-api-ecs
       ###################################################
+      - name: Grant execute permission to mvnw
+        run: chmod +x ./mvnw
+
       - name: Build JAR with Maven
         run: ./mvnw clean package -DskipTests
 
