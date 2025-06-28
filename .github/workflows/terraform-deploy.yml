@@ -50,11 +50,11 @@ jobs:
         working-directory: terraform-skillnest/terraform-db
 
       - name: Terraform Refresh (db)
-        run: terraform refresh -var="environment=dev" -var="project=arka" -var="db_identifier=arka-dev-db" -var="db_username=${{ secrets.DB_USERNAME }}" -var="db_password=${{ secrets.DB_PASSWORD }}" -var="db_name=arkadb" -var="vpc_id=vpc-0513a9bab7a11e39e" -var='private_subnets=["subnet-07a322f484b9f962","subnet-09ee219f4838cb06f"]'
+        run: terraform refresh -var="environment=dev" -var="project=arka" -var="db_identifier=arka-dev-db" -var="db_username=${{ secrets.DB_USERNAME }}" -var="db_password=${{ secrets.DB_PASSWORD }}" -var="db_name=arkadb" -var="vpc_id=vpc-0513a9bab7a11e39e" -var='subnet_ids=["subnet-07a322f484b9f962","subnet-09ee219f4838cb06f"]'
         working-directory: terraform-skillnest/terraform-db
 
       - name: Terraform Plan (db)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="environment=dev" -var="project=arka" -var="db_identifier=arka-dev-db" -var="db_username=${{ secrets.DB_USERNAME }}" -var="db_password=${{ secrets.DB_PASSWORD }}" -var="db_name=arkadb" -var="vpc_id=vpc-0513a9bab7a11e39e" -var='private_subnets=["subnet-07a322f484b9f962","subnet-09ee219f4838cb06f"]'
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="environment=dev" -var="project=arka" -var="db_identifier=arka-dev-db" -var="db_username=${{ secrets.DB_USERNAME }}" -var="db_password=${{ secrets.DB_PASSWORD }}" -var="db_name=arkadb" -var="vpc_id=vpc-0513a9bab7a11e39e" -var='subnet_ids=["subnet-07a322f484b9f962","subnet-09ee219f4838cb06f"]'
         working-directory: terraform-skillnest/terraform-db
 
       - name: Terraform Apply (db)
