@@ -9,5 +9,5 @@ module "rds" {
   allocated_storage = var.allocated_storage
 
   vpc_id     = var.vpc_id
-  subnet_ids = var.private_subnets
+  subnet_ids = var.subnet_ids
 }
