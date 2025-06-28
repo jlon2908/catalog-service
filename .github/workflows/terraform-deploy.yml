@@ -70,7 +70,7 @@ jobs:
         working-directory: terraform-skillnest/terraform-api-ecs
 
       - name: Terraform Refresh (api-ecs)
-        run: terraform refresh
+        run: terraform refresh -var="environment=dev" -var="project=arka" -var="db_r2dbc_url=${{ secrets.DB_R2DBC_URL }}" -var="db_jdbc_url=${{ secrets.DB_JDBC_URL }}" -var="db_username=${{ secrets.DB_USERNAME }}" -var="db_password=${{ secrets.DB_PASSWORD }}" -var="jwt_secret=${{ secrets.JWT_SECRET }}"
         working-directory: terraform-skillnest/terraform-api-ecs
 
       - name: Terraform Plan (api-ecs)
