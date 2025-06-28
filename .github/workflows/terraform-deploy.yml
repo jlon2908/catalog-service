@@ -30,7 +30,10 @@ jobs:
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Plan (preinfra)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="artifacts_bucket_name=arka-dev-artifacts" -var="environment=dev" -var="project=arka"
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
+          -var="artifacts_bucket_name=arka-dev-artifacts" \
+          -var="environment=dev" \
+          -var="project=arka"
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Apply (preinfra)
@@ -38,31 +41,35 @@ jobs:
         working-directory: terraform-skillnest/terraform-preinfra
 
       ###################################################
-      # MODULE 2: terraform-alb
+      # MODULE 2: terraform-db
       ###################################################
-      - name: Terraform Init (alb)
+      - name: Terraform Init (db)
         run: terraform init
-        working-directory: terraform-skillnest/terraform-alb
+        working-directory: terraform-skillnest/terraform-db
 
-      - name: Terraform Plan (alb)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="environment=dev" -var="project=arka"
-        working-directory: terraform-skillnest/terraform-alb
+      - name: Terraform Plan (db)
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
+          -var="environment=dev" \
+          -var="project=arka"
+        working-directory: terraform-skillnest/terraform-db
 
-      - name: Terraform Apply (alb)
+      - name: Terraform Apply (db)
         run: terraform apply -input=false -auto-approve tfplan.binary
-        working-directory: terraform-skillnest/terraform-alb
+        working-directory: terraform-skillnest/terraform-db
 
       ###################################################
-      # MODULE 3: terraform-ecs
+      # MODULE 3: terraform-api-ecs
       ###################################################
-      - name: Terraform Init (ecs)
+      - name: Terraform Init (api-ecs)
         run: terraform init
-        working-directory: terraform-skillnest/terraform-ecs
+        working-directory: terraform-skillnest/terraform-api-ecs
 
-      - name: Terraform Plan (ecs)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="environment=dev" -var="project=arka"
-        working-directory: terraform-skillnest/terraform-ecs
+      - name: Terraform Plan (api-ecs)
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
+          -var="environment=dev" \
+          -var="project=arka"
+        working-directory: terraform-skillnest/terraform-api-ecs
 
-      - name: Terraform Apply (ecs)
+      - name: Terraform Apply (api-ecs)
         run: terraform apply -input=false -auto-approve tfplan.binary
-        working-directory: terraform-skillnest/terraform-ecs
+        working-directory: terraform-skillnest/terraform-api-ecs
