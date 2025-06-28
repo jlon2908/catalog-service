@@ -2,6 +2,16 @@
 # 🔐 SECRETS (provenientes de GitHub Secrets)
 ##########################################
 
+variable "environment" {
+  type        = string
+  description = "Deployment environment (e.g. dev, prod)"
+}
+
+variable "project" {
+  type        = string
+  description = "Project name"
+}
+
 variable "db_r2dbc_url" {
   description = "R2DBC connection URL for the database"
   type        = string
