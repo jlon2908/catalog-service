@@ -30,11 +30,11 @@ jobs:
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Refresh (preinfra)
-        run: terraform refresh -var="artifacts_bucket_name=arka-dev-artifacts" -var="environment=dev" -var="project=arka"
+        run: terraform refresh -var="project=arka" -var="environment=dev" -var='default_tags={Owner="Jonathan",Department="Engineering"}' -var="artifacts_bucket_name=arka-dev-artifacts" -var='ecr_repositories=[{name="catalog-service",images_to_keep=10,allowed_accounts=[]}]'
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Plan (preinfra)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var-file=terraform.tfvars
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="project=arka" -var="environment=dev" -var='default_tags={Owner="Jonathan",Department="Engineering"}' -var="artifacts_bucket_name=arka-dev-artifacts" -var='ecr_repositories=[{name="catalog-service",images_to_keep=10,allowed_accounts=[]}]'
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Apply (preinfra)
