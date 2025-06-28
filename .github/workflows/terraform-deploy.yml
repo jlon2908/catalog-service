@@ -30,10 +30,7 @@ jobs:
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Plan (preinfra)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
-          -var="artifacts_bucket_name=arka-dev-artifacts" \
-          -var="environment=dev" \
-          -var="project=arka"
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="artifacts_bucket_name=arka-dev-artifacts" -var="environment=dev" -var="project=arka"
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Apply (preinfra)
@@ -48,9 +45,7 @@ jobs:
         working-directory: terraform-skillnest/terraform-alb
 
       - name: Terraform Plan (alb)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
-          -var="environment=dev" \
-          -var="project=arka"
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="environment=dev" -var="project=arka"
         working-directory: terraform-skillnest/terraform-alb
 
       - name: Terraform Apply (alb)
@@ -65,9 +60,7 @@ jobs:
         working-directory: terraform-skillnest/terraform-ecs
 
       - name: Terraform Plan (ecs)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary \
-          -var="environment=dev" \
-          -var="project=arka"
+        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="environment=dev" -var="project=arka"
         working-directory: terraform-skillnest/terraform-ecs
 
       - name: Terraform Apply (ecs)
