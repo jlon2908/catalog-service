@@ -27,7 +27,14 @@ jobs:
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Plan
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="artifacts_bucket_name=arka-dev-artifacts"
+        run: |
+          terraform plan \
+            -input=false \
+            -lock-timeout=60s \
+            -out=tfplan.binary \
+            -var="artifacts_bucket_name=arka-dev-artifacts" \
+            -var="environment=dev" \
+            -var="project=arka"
         working-directory: terraform-skillnest/terraform-preinfra
 
       - name: Terraform Apply
