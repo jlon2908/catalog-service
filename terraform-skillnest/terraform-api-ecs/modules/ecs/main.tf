@@ -77,7 +77,7 @@ resource "aws_ecs_service" "this" {
     container_port   = var.container_port
   }
 
-|  tags = var.tags
+  tags = var.tags
 }
 
 resource "aws_security_group" "ecs_service" {
