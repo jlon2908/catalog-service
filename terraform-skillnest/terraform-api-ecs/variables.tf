@@ -70,3 +70,13 @@ variable "vpc_id" {
   description = "ID de la VPC principal"
   type        = string
 }
+
+variable "public_subnets" {
+  description = "IDs de las subnets públicas"
+  type        = list(string)
+}
+
+variable "private_subnets" {
+  description = "IDs de las subnets privadas"
+  type        = list(string)
+}
