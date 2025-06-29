@@ -65,3 +65,8 @@ variable "container_image" {
   description = "Docker image URI for the container"
   type        = string
 }
+
+variable "vpc_id" {
+  description = "ID de la VPC principal"
+  type        = string
+}

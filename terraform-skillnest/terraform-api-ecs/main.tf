@@ -1,39 +1,39 @@
 module "alb" {
   source = "./modules/alb"
 
-  name_prefix              = var.name_prefix
-  vpc_id                   = data.aws_vpc.main.id
-  public_subnets           = data.aws_subnets.public.ids
-  container_port           = 8080 # Ajusta si tu app escucha en otro puerto
-  tags                     = var.common_tags
+  name_prefix                = var.name_prefix
+  vpc_id                     = var.vpc_id
+  public_subnets             = data.aws_subnets.public.ids
+  container_port             = 8080 # Ajusta si tu app escucha en otro puerto
+  tags                       = var.common_tags
   vpc_link_security_group_id = module.apigateway.vpc_link_security_group_id
 }
 
 module "apigateway" {
   source = "./modules/apigateway"
 
-  name_prefix       = var.name_prefix
-  vpc_id            = data.aws_vpc.main.id
-  private_subnets   = data.aws_subnets.private.ids
-  alb_listener_arn  = module.alb.listener_arn
-  alb_dns_name      = module.alb.load_balancer_dns
-  tags              = var.common_tags
-  allowed_origins   = ["*"] # Cambia esto si quieres restringir CORS
+  name_prefix     = var.name_prefix
+  vpc_id          = var.vpc_id
+  private_subnets = data.aws_subnets.private.ids
+  alb_listener_arn = module.alb.listener_arn
+  alb_dns_name    = module.alb.load_balancer_dns
+  tags            = var.common_tags
+  allowed_origins = ["*"] # Cambia esto si quieres restringir CORS
 }
 
 module "ecs" {
   source = "./modules/ecs"
 
-  name_prefix              = var.name_prefix
-  vpc_id                   = data.aws_vpc.main.id
-  private_subnets          = data.aws_subnets.private.ids
-  container_port           = 8080
-  target_group_arn         = module.alb.target_group_arn
+  name_prefix                = var.name_prefix
+  vpc_id                     = var.vpc_id
+  private_subnets            = data.aws_subnets.private.ids
+  container_port             = 8080
+  target_group_arn           = module.alb.target_group_arn
   vpc_link_security_group_id = module.apigateway.vpc_link_security_group_id
-  tags                     = var.common_tags
+  tags                       = var.common_tags
 
-  container_image          = var.container_image
-  aws_region               = var.aws_region
+  container_image            = var.container_image
+  aws_region                 = var.aws_region
 
   container_environment = [
     {
