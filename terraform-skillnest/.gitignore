@@ -19,3 +19,5 @@ terraform.rc
 
 # Provider binary
 terraform-provider-*
+
+!terraform-skillnest/terraform-preinfra/terraform.tfvars

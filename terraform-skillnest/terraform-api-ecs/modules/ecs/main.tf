@@ -77,11 +77,7 @@ resource "aws_ecs_service" "this" {
     container_port   = var.container_port
   }
 
-  depends_on = [
-    aws_lb_target_group_attachment.main
-  ]
-
-  tags = var.tags
+|  tags = var.tags
 }
 
 resource "aws_security_group" "ecs_service" {

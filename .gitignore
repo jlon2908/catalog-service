@@ -33,3 +33,6 @@ build/
 .vscode/
 
 .github/workflows/terraform-deploy.yml
+
+!terraform-skillnest/terraform-preinfra/terraform.tfvars
+
