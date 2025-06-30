@@ -30,7 +30,6 @@ CREATE TABLE public.brand (
 );
 
 
-ALTER TABLE public.brand OWNER TO postgres;
 
 --
 -- Name: brand_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -45,7 +44,6 @@ CREATE SEQUENCE public.brand_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.brand_id_seq OWNER TO postgres;
 
 --
 -- Name: brand_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -65,7 +63,6 @@ CREATE TABLE public.category (
 );
 
 
-ALTER TABLE public.category OWNER TO postgres;
 
 --
 -- Name: category_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -80,7 +77,6 @@ CREATE SEQUENCE public.category_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.category_id_seq OWNER TO postgres;
 
 --
 -- Name: category_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -99,7 +95,6 @@ CREATE TABLE public.feature (
 );
 
 
-ALTER TABLE public.feature OWNER TO postgres;
 
 --
 -- Name: feature_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -114,7 +109,6 @@ CREATE SEQUENCE public.feature_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.feature_id_seq OWNER TO postgres;
 
 --
 -- Name: feature_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
@@ -139,7 +133,6 @@ CREATE TABLE public.product (
 );
 
 
-ALTER TABLE public.product OWNER TO postgres;
 
 --
 -- Name: product_category; Type: TABLE; Schema: public; Owner: postgres
@@ -151,7 +144,6 @@ CREATE TABLE public.product_category (
 );
 
 
-ALTER TABLE public.product_category OWNER TO postgres;
 
 --
 -- Name: product_feature; Type: TABLE; Schema: public; Owner: postgres
@@ -164,7 +156,6 @@ CREATE TABLE public.product_feature (
 );
 
 
-ALTER TABLE public.product_feature OWNER TO postgres;
 
 --
 -- Name: product_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -179,7 +170,6 @@ CREATE SEQUENCE public.product_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.product_id_seq OWNER TO postgres;
 
 --
 -- Name: product_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
