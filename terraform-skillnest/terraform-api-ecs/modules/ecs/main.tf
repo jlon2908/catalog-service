@@ -101,9 +101,3 @@ resource "aws_security_group" "ecs_service" {
 
   tags = var.tags
 }
-
-resource "aws_lb_target_group_attachment" "main" {
-  target_group_arn = var.target_group_arn
-  target_id        = aws_ecs_service.this.id
-  port             = var.container_port
-}
