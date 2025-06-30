@@ -179,7 +179,7 @@ ALTER SEQUENCE public.product_id_seq OWNED BY public.product.id;
 
 
 --
--- Name: brand id; Type: DEFAULT; Schema: public; Owner: postgres
+-- Name brand id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.brand ALTER COLUMN id SET DEFAULT nextval('public.brand_id_seq'::regclass);
