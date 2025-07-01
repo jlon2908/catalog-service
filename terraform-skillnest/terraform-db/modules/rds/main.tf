@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "default" {
   name       = "arka-db-subnet-group"
-  subnet_ids = var.subnet_ids
+  subnet_ids = var.private_subnets // Cambiado de var.subnet_ids a var.private_subnets para consistencia
 
   tags = {
     Name = "ArkaDBSubnetGroup"
