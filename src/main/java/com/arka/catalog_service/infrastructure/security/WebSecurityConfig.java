@@ -46,7 +46,7 @@ public class WebSecurityConfig {
                                 "/swagger-ui.html",
                                 "/swagger-ui/**",
                                 "/swagger",         // ← agrega esta línea
-
+                                "/actuator/health",
                                 "/webjars/**"
                         ).permitAll()
                        .pathMatchers(
