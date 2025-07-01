@@ -1,33 +1,9 @@
 resource "aws_db_subnet_group" "default" {
   name       = "arka-db-subnet-group"
-  subnet_ids = var.private_subnets // Cambiado de var.subnet_ids a var.private_subnets para consistencia
+  subnet_ids = var.private_subnets
 
   tags = {
     Name = "ArkaDBSubnetGroup"
-  }
-}
-
-resource "aws_security_group" "rds_sg" {
-  name        = "arka-rds-sg"
-  description = "Allow inbound access to PostgreSQL"
-  vpc_id      = var.vpc_id
-
-  ingress {
-    from_port   = 5432
-    to_port     = 5432
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"] # ⚠️ Apertura total como solicitaste
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "ArkaRdsSecurityGroup"
   }
 }
 
@@ -41,7 +17,6 @@ resource "aws_db_instance" "rds_instance" {
   allocated_storage = var.allocated_storage
   storage_type      = "gp2"
 
-  vpc_security_group_ids = [aws_security_group.rds_sg.id]
   db_subnet_group_name   = aws_db_subnet_group.default.name
 
   skip_final_snapshot = true
