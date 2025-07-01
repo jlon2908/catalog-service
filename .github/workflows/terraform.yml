@@ -71,9 +71,7 @@ jobs:
 
       - name: Build JAR with Maven
         run: ./mvnw clean package -DskipTests
-
-      - name: Run Flyway Repair on RDS
-        run: ./mvnw flyway:repair -Dflyway.url=${{ secrets.DB_JDBC_URL }} -Dflyway.user=${{ secrets.DB_USERNAME }} -Dflyway.password=${{ secrets.DB_PASSWORD }}
+        
 
 
       - name: Configure AWS credentials
