@@ -8,6 +8,6 @@ module "rds" {
   instance_class    = var.instance_class
   allocated_storage = var.allocated_storage
 
-  vpc_id     = var.vpc_id
-  subnet_ids = var.private_subnets # Cambiado de var.subnet_ids a var.private_subnets para consistencia
+  vpc_id           = var.vpc_id
+  private_subnets  = var.private_subnets
 }
