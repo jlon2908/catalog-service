@@ -73,11 +73,7 @@ jobs:
         run: ./mvnw clean package -DskipTests
 
       - name: Run Flyway Repair on RDS
-        run: ./mvnw flyway:repair
-        env:
-          DB_JDBC_URL: ${{ secrets.DB_JDBC_URL }}
-          DB_USERNAME: ${{ secrets.DB_USERNAME }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+        run: ./mvnw flyway:repair -Dflyway.url=${{ secrets.DB_JDBC_URL }} -Dflyway.user=${{ secrets.DB_USERNAME }} -Dflyway.password=${{ secrets.DB_PASSWORD }}
 
 
       - name: Configure AWS credentials
