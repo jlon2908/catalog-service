@@ -30,6 +30,7 @@ module "ecs" {
   container_port             = 8080
   target_group_arn           = module.alb.target_group_arn
   vpc_link_security_group_id = module.apigateway.vpc_link_security_group_id
+  alb_security_group_id      = module.alb.security_group_id
   tags                       = var.common_tags
 
   container_image            = var.container_image

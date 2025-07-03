@@ -43,28 +43,10 @@ jobs:
         working-directory: terraform-skillnest/terraform-preinfra
         continue-on-error: true
 
-      ###################################################
-      # MODULE 2: terraform-db
-      ###################################################
-      - name: Terraform Init (db)
-        run: terraform init -reconfigure
-        working-directory: terraform-skillnest/terraform-db
 
-      - name: Terraform Refresh (db)
-        run: terraform refresh -var="environment=dev" -var="project=arka" -var="db_identifier=arka-dev-db" -var="db_username=${{ secrets.DB_USERNAME }}" -var="db_password=${{ secrets.DB_PASSWORD }}" -var="db_name=arkadb" -var="vpc_id=vpc-0513a9bab7a11e39e" -var='private_subnets=["subnet-057a322f484b9f962","subnet-09ee219f4838cb06f"]'
-        working-directory: terraform-skillnest/terraform-db
-
-      - name: Terraform Plan (db)
-        run: terraform plan -input=false -lock-timeout=60s -out=tfplan.binary -var="environment=dev" -var="project=arka" -var="db_identifier=arka-dev-db" -var="db_username=${{ secrets.DB_USERNAME }}" -var="db_password=${{ secrets.DB_PASSWORD }}" -var="db_name=arkadb" -var="vpc_id=vpc-0513a9bab7a11e39e" -var='private_subnets=["subnet-057a322f484b9f962","subnet-09ee219f4838cb06f"]'
-        working-directory: terraform-skillnest/terraform-db
-
-      - name: Terraform Apply (db)
-        run: terraform apply -input=false -auto-approve tfplan.binary
-        working-directory: terraform-skillnest/terraform-db
-        continue-on-error: true
 
       ###################################################
-      # MODULE 3: terraform-api-ecs
+      # MODULE 2: terraform-api-ecs
       ###################################################
       - name: Grant execute permission to mvnw
         run: chmod +x ./mvnw

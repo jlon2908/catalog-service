@@ -18,7 +18,7 @@ import java.util.List;
 
 @Component
 public class JwtSecurityContextRepository implements ServerSecurityContextRepository {
-    @Value("${security.jwt.secret}")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     @Override

@@ -47,6 +47,11 @@ variable "vpc_link_security_group_id" {
   type        = string
 }
 
+variable "alb_security_group_id" {
+  description = "Security group ID of the ALB"
+  type        = string
+}
+
 variable "tags" {
   description = "Common tags"
   type        = map(string)

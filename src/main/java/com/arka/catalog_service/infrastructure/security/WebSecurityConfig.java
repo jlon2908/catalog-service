@@ -31,7 +31,7 @@ public class WebSecurityConfig {
 
     private final JwtSecurityContextRepository jwtSecurityContextRepository;
 
-    @Value("${security.jwt.secret}")
+    @Value("${jwt.secret}")
     private String jwtSecret;
 
     @Bean
@@ -82,4 +82,3 @@ public class WebSecurityConfig {
     }
 
 }
-
