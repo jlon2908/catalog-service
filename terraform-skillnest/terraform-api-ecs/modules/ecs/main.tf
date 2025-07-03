@@ -97,7 +97,7 @@ resource "aws_security_group" "ecs_service" {
     to_port         = var.container_port
     protocol        = "tcp"
     security_groups = [var.alb_security_group_id]
-    description     = "Permitir tráfico desde el ALB"
+    description     = "Allow traffic from ALB"
   }
 
   egress {
