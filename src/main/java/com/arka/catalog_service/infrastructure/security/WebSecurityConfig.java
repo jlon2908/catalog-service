@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.core.env.Environment;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableReactiveMethodSecurity;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -31,7 +32,7 @@ public class WebSecurityConfig {
 
     private final JwtSecurityContextRepository jwtSecurityContextRepository;
 
-    @Value("${jwt.secret}")
+    @Value("${security.jwt.secret}")
     private String jwtSecret;
 
     @Bean
@@ -66,7 +67,6 @@ public class WebSecurityConfig {
     }
 
 
-
     private Converter<Jwt, Mono<? extends AbstractAuthenticationToken>> grantedAuthoritiesExtractor() {
         return jwt -> {
             Collection<GrantedAuthority> authorities = new ArrayList<>();
@@ -80,5 +80,5 @@ public class WebSecurityConfig {
         return NimbusReactiveJwtDecoder.withSecretKey(new SecretKeySpec(jwtSecret.getBytes(), "HmacSHA256"))
                 .build();
     }
-
 }
+
